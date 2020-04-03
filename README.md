@@ -56,7 +56,7 @@ qr_cornerColor|color|扫描框折角颜色
 qr_cornerLength|dimension|扫描框折角长度
 qr_gridColor|color|扫描框颜色
 qr_gridColumnCount|int|扫描框格子列数
-qr_gridRowCount|int|扫扫描框格子行数
+qr_gridRowCount|int|扫描框格子行数
 qr_offsetXRatio|float|扫描框中心点相对于宽度的横向偏移
 qr_offsetYRatio|float|扫描框中心点相对于高度的纵向偏移
 qr_sizeRatio|float|扫描框相对于max(width, height)的比例
