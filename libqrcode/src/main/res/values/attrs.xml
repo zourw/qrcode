@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="QRCodeView">
+        <attr name="qr_maskColor" format="color" />
+        <attr name="qr_cornerBreadth" format="dimension" />
+        <attr name="qr_cornerLength" format="dimension" />
+        <attr name="qr_cornerColor" format="color" />
+        <attr name="qr_gridColor" format="color" />
+        <attr name="qr_gridRowCount" format="integer" />
+        <attr name="qr_gridColumnCount" format="integer" />
+        <attr name="qr_sizeRatio" format="float" />
+        <attr name="qr_offsetXRatio" format="float" />
+        <attr name="qr_offsetYRatio" format="float" />
+    </declare-styleable>
+</resources>
