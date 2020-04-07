@@ -15,6 +15,8 @@ implementation 'com.zourw:qrcode-java:1.0.1' // java
 1. 使用Activity
 
     ```kotlin
+    // kotlin调用
+
     Intent(this, QRCodeActivity::class.java)
       .putExtra(EXTRA_TITLE, "二维码扫描")
       .putExtra(EXTRA_HINT, "将二维码放入框内，即可自动扫描")
@@ -34,6 +36,8 @@ implementation 'com.zourw:qrcode-java:1.0.1' // java
     ```
 
     ```java
+    // java调用
+
     final Intent intent = new Intent(MainActivity2.this, QRCodeActivity.class);
     intent.putExtra(QRCodeActivity.EXTRA_TITLE, "二维码扫描");
     intent.putExtra(QRCodeActivity.EXTRA_HINT, "将二维码放入框内，即可自动扫描");
