@@ -64,19 +64,35 @@ implementation 'com.zourw:qrcode-java:1.0.1' // java
 2. 使用QRCodeView
 
     ```xml
-    <com.zourw.libqrcode.QRCodeView
-      android:id="@+id/qrCodeView"
-      android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      app:qr_cornerBreadth="3dp"
-      app:qr_cornerColor="#00ff00"
-      app:qr_cornerLength="30dp"
-      app:qr_gridColor="#00ff00"
-      app:qr_gridColumnCount="30"
-      app:qr_gridRowCount="30"
-      app:qr_offsetXRatio="0.5"
-      app:qr_offsetYRatio="0.5"
-      app:qr_sizeRatio="0.7" />
+    // kotlin
+    <com.zourw.libqrcode_ktx.QRCodeView
+        android:id="@+id/qrCodeView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:qr_cornerBreadth="3dp"
+        app:qr_cornerColor="#00ff00"
+        app:qr_cornerLength="30dp"
+        app:qr_gridColor="#00ff00"
+        app:qr_gridColumnCount="30"
+        app:qr_gridRowCount="30"
+        app:qr_offsetXRatio="0.5"
+        app:qr_offsetYRatio="0.5"
+        app:qr_sizeRatio="0.7" />
+
+    // java
+    <com.zourw.libqrcode_java.QRCodeView
+        android:id="@+id/qrCodeView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:qr_cornerBreadth="3dp"
+        app:qr_cornerColor="#03A9F4"
+        app:qr_cornerLength="30dp"
+        app:qr_gridColor="#03A9F4"
+        app:qr_gridColumnCount="30"
+        app:qr_gridRowCount="30"
+        app:qr_offsetXRatio="0.5"
+        app:qr_offsetYRatio="0.5"
+        app:qr_sizeRatio="0.7" />
     ```
 
 参数|类型|说明
