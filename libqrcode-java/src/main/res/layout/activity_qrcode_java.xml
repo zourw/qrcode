@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.zourw.libqrcode_java.QRCodeView
+        android:id="@+id/qrCodeView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:qr_cornerBreadth="3dp"
+        app:qr_cornerColor="#03A9F4"
+        app:qr_cornerLength="30dp"
+        app:qr_gridColor="#03A9F4"
+        app:qr_gridColumnCount="30"
+        app:qr_gridRowCount="30"
+        app:qr_offsetXRatio="0.5"
+        app:qr_offsetYRatio="0.5"
+        app:qr_sizeRatio="0.7" />
+
+    <androidx.appcompat.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true"
+        app:contentInsetStart="0dp">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="44dp">
+
+            <ImageView
+                android:id="@+id/btnBack"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="left|center"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:src="@drawable/icon_qrcode_back" />
+
+            <TextView
+                android:id="@+id/tvTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="60dp"
+                android:layout_marginRight="60dp"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:singleLine="true"
+                android:text="二维码扫描"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp" />
+        </FrameLayout>
+    </androidx.appcompat.widget.Toolbar>
+
+    <TextView
+        android:id="@+id/tvHint"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"
+        android:text="将二维码放入框内，即可自动扫描"
+        android:textColor="#FFFFFF"
+        android:textSize="14sp" />
+
+    <FrameLayout
+        android:id="@+id/swFlash"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/qrcode_flash_bg">
+
+        <CheckBox
+            android:id="@+id/cbFlash"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center"
+            android:background="@drawable/qrcode_flash"
+            android:button="@null"
+            android:clickable="false"
+            android:duplicateParentState="true" />
+    </FrameLayout>
+</FrameLayout>

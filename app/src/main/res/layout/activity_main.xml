@@ -7,10 +7,16 @@
     tools:context=".MainActivity">
 
     <Button
-        android:id="@+id/btnScan"
+        android:id="@+id/btnScanKtx"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="open activity" />
+        android:text="SCAN QRCODE WITH KTX" />
+
+    <Button
+        android:id="@+id/btnScanJava"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="SCAN QRCODE WITH JAVA" />
 
     <FrameLayout
         android:layout_width="match_parent"

@@ -5,7 +5,9 @@
 ## 安装
 
 ```gradle
-implementation 'com.zourw:qrcode-ktx:1.0.0'
+implementation 'com.zourw:qrcode-ktx:1.0.1' // kotlin
+
+implementation 'com.zourw:qrcode-java:1.0.1' // java
 ```
 
 ## 使用
@@ -26,6 +28,30 @@ implementation 'com.zourw:qrcode-ktx:1.0.0'
             when (resultCode) {
                 Activity.RESULT_OK -> tvResult.append("${data?.getStringExtra(EXTRA_RESULT)}\n\n")
                 Activity.RESULT_CANCELED -> tvResult.append("取消\n\n")
+            }
+        }
+    }
+    ```
+
+    ```java
+    final Intent intent = new Intent(MainActivity2.this, QRCodeActivity.class);
+    intent.putExtra(QRCodeActivity.EXTRA_TITLE, "二维码扫描");
+    intent.putExtra(QRCodeActivity.EXTRA_HINT, "将二维码放入框内，即可自动扫描");
+    startActivityForResult(intent, REQUEST_CODE);
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_CODE) {
+            switch (resultCode) {
+                case RESULT_OK:
+                    if (data != null) {
+                        tvResult.append(data.getStringExtra(QRCodeActivity.EXTRA_RESULT) + "\n\n");
+                    }
+                    break;
+                case RESULT_CANCELED:
+                    tvResult.append("取消\n\n");
+                    break;
             }
         }
     }

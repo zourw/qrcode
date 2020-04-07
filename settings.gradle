@@ -1,3 +1,4 @@
 rootProject.name='QRCode'
 include ':app'
-include ':libqrcode'
+include ':libqrcode-ktx'
+include ':libqrcode-java'
