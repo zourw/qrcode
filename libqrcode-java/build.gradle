@@ -32,7 +32,7 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
-    implementation 'com.google.zxing:core:3.4.0'
+    implementation 'com.google.zxing:core:3.3.3'
     implementation 'com.otaliastudios:cameraview:2.6.2'
 }
 
@@ -41,7 +41,7 @@ publish {
     userOrg = 'zrw0820'
     groupId = 'com.zourw'
     artifactId = 'qrcode-java'
-    publishVersion = '1.0.1'
+    publishVersion = '1.0.2'
     desc = 'Android 二维码扫码库'
     website = 'https://github.com/zourw/qrcode.git'
 }
