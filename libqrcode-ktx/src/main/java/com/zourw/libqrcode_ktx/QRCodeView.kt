@@ -279,8 +279,8 @@ class QRCodeView @JvmOverloads constructor(
 
         val centerX = rect.centerX() * wRatio
         val centerY = rect.centerY() * hRatio
-        val halfWidth = rect.width() / 2f * min(wRatio, hRatio)
-        val halfHeight = rect.height() / 2f * min(wRatio, hRatio)
+        val halfWidth = rect.width() / 2f * wRatio
+        val halfHeight = rect.height() / 2f * hRatio
 
         rect.left = centerX - halfWidth
         rect.right = centerX + halfWidth

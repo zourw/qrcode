@@ -295,8 +295,8 @@ public class QRCodeView extends FrameLayout {
 
         final float centerX = rect.centerX() * wRatio;
         final float centerY = rect.centerY() * hRatio;
-        final float halfWidth = rect.width() / 2f * Math.min(wRatio, hRatio);
-        final float halfHeight = rect.height() / 2f * Math.min(wRatio, hRatio);
+        final float halfWidth = rect.width() / 2f * wRatio;
+        final float halfHeight = rect.height() / 2f * hRatio;
 
         rect.left = centerX - halfWidth;
         rect.right = centerX + halfWidth;
