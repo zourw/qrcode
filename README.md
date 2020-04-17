@@ -5,9 +5,9 @@
 ## 安装
 
 ```gradle
-implementation 'com.zourw:qrcode-ktx:1.0.2' // kotlin
+implementation 'com.zourw:qrcode-ktx:1.0.3' // kotlin
 
-implementation 'com.zourw:qrcode-java:1.0.2' // java
+implementation 'com.zourw:qrcode-java:1.0.3' // java
 ```
 
 ## 使用

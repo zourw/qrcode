@@ -53,7 +53,7 @@ publish {
     userOrg = 'zrw0820'
     groupId = 'com.zourw'
     artifactId = 'qrcode-ktx'
-    publishVersion = '1.0.2'
+    publishVersion = '1.0.3'
     desc = 'Android 二维码扫码库'
     website = 'https://github.com/zourw/qrcode.git'
 }
