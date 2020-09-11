@@ -2,7 +2,6 @@
     package="com.zourw.libqrcode_java">
 
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.RECORD_AUDIO" />
 
     <application>
         <activity

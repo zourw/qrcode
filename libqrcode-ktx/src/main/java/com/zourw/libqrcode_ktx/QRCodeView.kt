@@ -14,6 +14,7 @@ import com.google.zxing.*
 import com.google.zxing.common.GlobalHistogramBinarizer
 import com.google.zxing.common.HybridBinarizer
 import com.otaliastudios.cameraview.CameraView
+import com.otaliastudios.cameraview.controls.Audio
 import com.otaliastudios.cameraview.controls.Engine
 import com.otaliastudios.cameraview.frame.Frame
 import com.otaliastudios.cameraview.gesture.Gesture
@@ -28,9 +29,9 @@ import kotlin.math.min
 private const val DEF_COLOR = 0xFF00FF00.toInt()
 
 class QRCodeView @JvmOverloads constructor(
-        context: Context,
-        attrs: AttributeSet? = null,
-        defStyleAttr: Int = 0
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0
 ) : FrameLayout(context, attrs, defStyleAttr) {
     private val maskPaint = Paint().apply {
         color = 0xBF04080D.toInt()
@@ -73,6 +74,7 @@ class QRCodeView @JvmOverloads constructor(
     val cameraView = CameraView(context).apply {
         set(Engine.CAMERA1)
         playSounds = false
+        audio = Audio.OFF
         mapGesture(Gesture.PINCH, GestureAction.ZOOM)
         mapGesture(Gesture.TAP, GestureAction.AUTO_FOCUS)
         addFrameProcessor { processFrame(it) }
@@ -97,7 +99,10 @@ class QRCodeView @JvmOverloads constructor(
     private val mainHandler = Handler(Looper.getMainLooper())
 
     init {
-        addView(cameraView, LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT))
+        addView(
+            cameraView,
+            LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
+        )
 
         setWillNotDraw(true)
         attrs?.let { context.obtainStyledAttributes(it, R.styleable.QRCodeView) }?.run {
@@ -139,16 +144,16 @@ class QRCodeView @JvmOverloads constructor(
         scanFrame.bottom = centerY + size / 2
 
         scanFrame.offset(
-                when {
-                    scanFrame.left < 0 -> -scanFrame.left
-                    scanFrame.right > measuredWidth -> measuredWidth - scanFrame.right
-                    else -> 0f
-                },
-                when {
-                    scanFrame.top < 0 -> -scanFrame.top
-                    scanFrame.bottom > measuredHeight -> measuredHeight - scanFrame.bottom
-                    else -> 0f
-                }
+            when {
+                scanFrame.left < 0 -> -scanFrame.left
+                scanFrame.right > measuredWidth -> measuredWidth - scanFrame.right
+                else -> 0f
+            },
+            when {
+                scanFrame.top < 0 -> -scanFrame.top
+                scanFrame.bottom > measuredHeight -> measuredHeight - scanFrame.bottom
+                else -> 0f
+            }
         )
 
         gridPath.reset()
@@ -171,18 +176,19 @@ class QRCodeView @JvmOverloads constructor(
         val gridBottom = scanFrame.bottom + 0.01f * scanFrame.height()
 
         gridGradient = LinearGradient(
-                0f,
-                scanFrame.top,
-                0f,
-                gridBottom,
-                intArrayOf(Color.TRANSPARENT, gridColor.withAlpha(0.4f), Color.TRANSPARENT),
-                floatArrayOf(0f, 0.99f, 1f),
-                Shader.TileMode.CLAMP
+            0f,
+            scanFrame.top,
+            0f,
+            gridBottom,
+            intArrayOf(Color.TRANSPARENT, gridColor.withAlpha(0.4f), Color.TRANSPARENT),
+            floatArrayOf(0f, 0.99f, 1f),
+            Shader.TileMode.CLAMP
         )
 
         gridMaskGradients.apply {
             clear()
-            add(LinearGradient(
+            add(
+                LinearGradient(
                     0f,
                     scanFrame.top,
                     0f,
@@ -190,53 +196,70 @@ class QRCodeView @JvmOverloads constructor(
                     intArrayOf(Color.TRANSPARENT, gridColor.withAlpha(0.1f), Color.TRANSPARENT),
                     floatArrayOf(0f, 0.99f, 1f),
                     Shader.TileMode.CLAMP
-            ))
-            add(LinearGradient(
+                )
+            )
+            add(
+                LinearGradient(
                     0f, scanFrame.top, 0f, gridBottom,
                     intArrayOf(
-                            Color.TRANSPARENT,
-                            Color.TRANSPARENT,
-                            gridColor.withAlpha(0.35f),
-                            Color.TRANSPARENT
+                        Color.TRANSPARENT,
+                        Color.TRANSPARENT,
+                        gridColor.withAlpha(0.35f),
+                        Color.TRANSPARENT
                     ), floatArrayOf(0f, 0.875f, 0.99f, 1f),
                     Shader.TileMode.CLAMP
-            ))
-            add(LinearGradient(
+                )
+            )
+            add(
+                LinearGradient(
                     0f, scanFrame.top, 0f, gridBottom,
                     intArrayOf(
-                            Color.TRANSPARENT,
-                            Color.TRANSPARENT,
-                            gridColor.withAlpha(0.15f),
-                            Color.TRANSPARENT
+                        Color.TRANSPARENT,
+                        Color.TRANSPARENT,
+                        gridColor.withAlpha(0.15f),
+                        Color.TRANSPARENT
                     ), floatArrayOf(0f, 0.95f, 0.99f, 1f),
                     Shader.TileMode.CLAMP
-            ))
+                )
+            )
         }
     }
 
     private fun initGridAnimation() {
         ValueAnimator
-                .ofFloat(-scanFrame.height(), 0f)
-                .apply {
-                    repeatMode = ValueAnimator.RESTART
-                    interpolator = AccelerateDecelerateInterpolator()
-                    repeatCount = -1
-                    duration = 1500
-                    addUpdateListener {
-                        gridMatrix.setTranslate(0f, it.animatedValue as Float)
-                        invalidate()
-                    }
+            .ofFloat(-scanFrame.height(), 0f)
+            .apply {
+                repeatMode = ValueAnimator.RESTART
+                interpolator = AccelerateDecelerateInterpolator()
+                repeatCount = -1
+                duration = 1500
+                addUpdateListener {
+                    gridMatrix.setTranslate(0f, it.animatedValue as Float)
+                    invalidate()
                 }
-                .start()
+            }
+            .start()
     }
 
     override fun dispatchDraw(canvas: Canvas) {
         super.dispatchDraw(canvas)
         canvas.apply {
             drawRect(0f, 0f, scanFrame.left, measuredHeight.toFloat(), maskPaint)
-            drawRect(scanFrame.right, 0f, measuredWidth.toFloat(), measuredHeight.toFloat(), maskPaint)
+            drawRect(
+                scanFrame.right,
+                0f,
+                measuredWidth.toFloat(),
+                measuredHeight.toFloat(),
+                maskPaint
+            )
             drawRect(scanFrame.left, 0f, scanFrame.right, scanFrame.top, maskPaint)
-            drawRect(scanFrame.left, scanFrame.bottom, scanFrame.right, measuredHeight.toFloat(), maskPaint)
+            drawRect(
+                scanFrame.left,
+                scanFrame.bottom,
+                scanFrame.right,
+                measuredHeight.toFloat(),
+                maskPaint
+            )
         }
 
         canvas.apply {
@@ -255,7 +278,7 @@ class QRCodeView @JvmOverloads constructor(
 
         canvas.apply {
             save()
-            (0..3).forEach { _ ->
+            repeat(3) {
                 save()
                 translate(cornerBreadth / 2f, cornerBreadth / 2f)
                 cornerPath.apply {
@@ -313,10 +336,17 @@ class QRCodeView @JvmOverloads constructor(
         try {
             val scanAreaRect: RectF = calScanAreaRect(width, height)
             val source = PlanarYUVLuminanceSource(
-                    data, width, height,
-                    scanAreaRect.left.toInt(), scanAreaRect.top.toInt(), scanAreaRect.width().toInt(), scanAreaRect.height().toInt(),
-                    false)
-            rawResult = multiFormatReader.decodeWithState(BinaryBitmap(GlobalHistogramBinarizer(source)))
+                data,
+                width,
+                height,
+                scanAreaRect.left.toInt(),
+                scanAreaRect.top.toInt(),
+                scanAreaRect.width().toInt(),
+                scanAreaRect.height().toInt(),
+                false
+            )
+            rawResult =
+                multiFormatReader.decodeWithState(BinaryBitmap(GlobalHistogramBinarizer(source)))
             if (rawResult == null) {
                 rawResult = multiFormatReader.decodeWithState(BinaryBitmap(HybridBinarizer(source)))
                 if (rawResult != null) {

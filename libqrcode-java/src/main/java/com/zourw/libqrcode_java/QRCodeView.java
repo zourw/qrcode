@@ -31,6 +31,7 @@ import com.google.zxing.Result;
 import com.google.zxing.common.GlobalHistogramBinarizer;
 import com.google.zxing.common.HybridBinarizer;
 import com.otaliastudios.cameraview.CameraView;
+import com.otaliastudios.cameraview.controls.Audio;
 import com.otaliastudios.cameraview.controls.Engine;
 import com.otaliastudios.cameraview.frame.Frame;
 import com.otaliastudios.cameraview.frame.FrameProcessor;
@@ -94,6 +95,7 @@ public class QRCodeView extends FrameLayout {
     private CameraView cameraView = new CameraView(getContext()) {{
         set(Engine.CAMERA1);
         setPlaySounds(false);
+        setAudio(Audio.OFF);
         mapGesture(Gesture.PINCH, GestureAction.ZOOM);
         mapGesture(Gesture.TAP, GestureAction.AUTO_FOCUS);
         addFrameProcessor(new FrameProcessor() {
